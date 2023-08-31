@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:padding="20.0dip" >
+
+    <LinearLayout
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="#ff7200"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/title"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            android:layout_width="fill_parent"
+            android:layout_height="200dp"
+            android:gravity="center"
+            android:text="Perfectly explains Klotski!!!"
+            android:background="#ede0c8"
+            android:visibility="visible" />
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/give_money"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="Good Game! Give a tip?"
+            android:clickable="true"/>
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            android:background="#bbada0"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/positiveTextView"
+                android:textSize="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:text="Back to Menu"
+                android:clickable="true"/>
+
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/negativeTextView"
+                android:textSize="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:text="Restart"
+                android:clickable="true"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

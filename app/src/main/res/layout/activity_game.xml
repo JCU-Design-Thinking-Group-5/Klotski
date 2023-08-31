@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".GameView"
+    android:background="#bbada0">
+
+    <LinearLayout
+        android:id="@+id/head_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="10dp">
+
+        <Button
+            android:id="@+id/refresh"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:text="@string/refresh"
+            android:textSize="24sp"
+            android:background="#9f8b77"/>
+
+        <TextView
+            android:id="@+id/game_title"
+            android:layout_width="121dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="@string/game_title"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/returnMain"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:text="@string/returnMain"
+            android:textSize="24sp"
+            android:background="#9f8b77"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/neck_view"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:id="@+id/steps"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="0dp"
+            android:layout_marginStart="70dp"
+            android:text="@string/steps"
+            android:gravity="center"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/count_steps"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:gravity="left"
+            android:text="@string/count_steps"
+            android:textSize="24sp" />
+
+
+        <TextView
+            android:id="@+id/show_best_steps"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="0dp"
+            android:text="Min Step"
+            android:gravity="center"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/best_steps"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:gravity="center|left"
+            android:text="@string/count_steps"
+            android:textSize="20sp" />
+
+
+    </LinearLayout>
+
+    <com.example.newklotski.GameView
+        android:id="@+id/game_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </com.example.newklotski.GameView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        >
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>
