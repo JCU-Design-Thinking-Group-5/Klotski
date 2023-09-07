@@ -26,8 +26,7 @@ public class GameActivity extends AppCompatActivity {
     private int steps = 0;
     private Boolean isOver = false;
 
-
-
+    // Constructor
     public GameActivity(){
         gameActivity = this;
     }
@@ -36,12 +35,15 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        // Initialize UI elements
         steps_text = (TextView) findViewById(R.id.count_steps);
         TextView textView = findViewById(R.id.game_title);
         AssetManager mgr=getResources().getAssets();
         Typeface tf = Typeface.createFromAsset(mgr, "fonts/SIMLI.ttf");
         textView.setTypeface(tf);
 
+        // Button for refreshing the game
         Button button_refresh = findViewById(R.id.refresh);
         button_refresh.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +53,7 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
+        // Button for returning to the main activity
         Button button_returnMain = findViewById(R.id.returnMain);
         button_returnMain.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,56 +63,55 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
+        // Create a database helper and get a writable database instance
         DataHelper dbHelper = new DataHelper(this, DataHelper.DATABASE_NAME,null,1);
         SQLiteDatabase sqliteDatabase = dbHelper.getWritableDatabase();
 
+        // Update the best steps display
         updateBestSteps();
-
-//        //Min Steps
-//        TextView best_text = findViewById(R.id.best_steps);
-//        Cursor cursor = sqliteDatabase.rawQuery("select min(steps) from user where game_name == 0", null);
-//        if(cursor.moveToFirst()){
-//            int minSteps = cursor.getInt(0); // 获取查询的第一个结果
-//            best_text.setText(String.valueOf(minSteps));
-//        }else{
-//            best_text.setText("No Record");
-//        }
     }
+
+    // Update the best steps display
     private void updateBestSteps() {
         TextView best_text = findViewById(R.id.best_steps);
         DataHelper dbHelper = new DataHelper(this, DataHelper.DATABASE_NAME,null,1);
         SQLiteDatabase sqliteDatabase = dbHelper.getWritableDatabase();
 
-        Cursor cursor = sqliteDatabase.rawQuery("select min(steps) from user where game_name == 0", null);
+        // Query the minimum steps from the database
+        Cursor cursor = sqliteDatabase.rawQuery("SELECT MIN(steps) FROM user WHERE game_name = 0", null);
         if(cursor.moveToFirst()){
             int minSteps = cursor.getInt(0);
             best_text.setText(String.valueOf(minSteps));
-        }else{
+        } else {
             best_text.setText("No Record");
         }
+
         cursor.close();
         sqliteDatabase.close();
     }
 
-
+    // Clear the steps count
     public void clearSteps(){
         steps = 0;
         showSteps();
     }
 
+    // Display the steps count
     public void showSteps(){
         steps_text.setText(steps+"");
     }
 
+    // Update the steps count
     public void addSteps(int s){
         steps = s;
         showSteps();
     }
 
+    // Check if the game is over and show the dialog box
     public void checkOver(Boolean flag){
         isOver = flag;
         if (isOver){
-            //Add vibration effect
+            // Add vibration effect
             Vibrator vibrator = (Vibrator)this.getSystemService(this.VIBRATOR_SERVICE);
             long[] patter = {1000, 1000, 2000, 50};
             vibrator.vibrate(1000);
@@ -119,7 +121,7 @@ public class GameActivity extends AppCompatActivity {
             LayoutInflater inflater = LayoutInflater.from(this);
             View dialogView = inflater.inflate(R.layout.dialog_normal_layout, null);
 
-            // find give_money from this view
+            // Find "give_money" TextView from the view and set its click listener
             TextView give_money = dialogView.findViewById(R.id.give_money);
             give_money.setClickable(true);
             give_money.setOnClickListener(new View.OnClickListener() {
@@ -132,11 +134,11 @@ public class GameActivity extends AppCompatActivity {
 
             // Create dialog box
             final Dialog dialog = new Dialog(this);
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // 移除标题栏
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog.setContentView(dialogView);
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT)); // 设置背景为透明
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-            // set button click event
+            // Set click listeners for positive and negative buttons
             TextView positiveTextView = dialogView.findViewById(R.id.positiveTextView);
             positiveTextView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -159,7 +161,7 @@ public class GameActivity extends AppCompatActivity {
                 }
             });
 
-            // show dialog box
+            // Show the dialog box
             DataStorage();
             updateBestSteps();
             dialog.show();
@@ -172,13 +174,13 @@ public class GameActivity extends AppCompatActivity {
         return gameActivity;
     }
 
+    // Store game completion data in the database
     private void DataStorage() {
         DataHelper dbHelper1 = new DataHelper(this, DataHelper.DATABASE_NAME, null, 2);
         SQLiteDatabase sqliteDatabase1 = dbHelper1.getWritableDatabase();
 
-        // query the min steps
-        Cursor cursor = sqliteDatabase1.rawQuery("select min(steps) from user where game_name == 0", null);
-
+        // Query the min steps
+        Cursor cursor = sqliteDatabase1.rawQuery("SELECT MIN(steps) FROM user WHERE game_name = 0", null);
 
         ContentValues values1 = new ContentValues();
         values1.put("game_name", GameView.level);
@@ -189,7 +191,4 @@ public class GameActivity extends AppCompatActivity {
 
         sqliteDatabase1.close();
     }
-
-
-
 }
